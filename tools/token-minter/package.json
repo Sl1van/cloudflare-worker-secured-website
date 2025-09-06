@@ -6,10 +6,10 @@
     "jose": "^5.3.0"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "typescript": "^5.6.3"
   },
   "scripts": {
-    "mint": "ts-node mint-url.ts"
+    "mint": "tsx mint-url.ts"
   }
 }
