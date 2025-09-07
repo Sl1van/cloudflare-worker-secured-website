@@ -5,6 +5,18 @@ The protection is implemented using a Cloudflare **Pages Function middleware** t
 
 A separate Node.js script (`tools/token-minter`) is provided to mint valid URLs that set the cookie and grant temporary access.
 
+## ⚠️ Security Notice
+
+**This code is provided for educational and demonstration purposes only.**
+
+- **Do NOT use this to protect sensitive, confidential, or critical data**
+- This implementation has NOT been security audited or tested
+- It provides basic access control, not robust security
+- Suitable only for simple use cases like hiding work-in-progress sites from public view
+- For production applications with sensitive data, use proper authentication services
+
+If you need to protect sensitive data, consider using established authentication providers like Auth0, AWS Cognito, Firebase Auth, or similar services.
+
 ---
 
 ## How it works
