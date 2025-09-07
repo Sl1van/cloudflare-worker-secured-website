@@ -22,19 +22,16 @@ This approach is **not meant to be high-security authentication**, but it’s a 
 
 ---
 
-## Generate ES256 PEM keys
+## Generate ed25519 PEM keys
 
 These keys will be used in the middleware (public key) and by the token-minter script (private key) to generate signed access tokens.
 
 ```bash
-# Generate raw EC private key (prime256v1 = P-256 curve)
-openssl ecparam -name prime256v1 -genkey -noout -out es256-private-raw.pem
+# Private (PKCS#8)
+openssl genpkey -algorithm Ed25519 -out ed25519-private.pem
 
-# Convert to PKCS#8 (needed for Node/jose)
-openssl pkcs8 -topk8 -nocrypt -in es256-private-raw.pem -out es256-private.pem
-
-# Extract the public key (SPKI PEM, used in Cloudflare env)
-openssl ec -in es256-private-raw.pem -pubout -out es256-public.pem
+# Public (SPKI)
+openssl pkey -in ed25519-private.pem -pubout -out ed25519-public.pem
 ```
 
 ## Creating a URL with an access token
@@ -46,7 +43,7 @@ Example: create a token valid for 30 minutes:
 ```bash
 cd tools/token-minter
 pnpm install
-pnpm run mint -- --base https://example.com --minutes 30 --key ./es256-private.pem
+pnpm run mint -- --base https://example.com --minutes 30 --key ./ed25519-private.pem
 ```
 
 The script will print a URL like:
